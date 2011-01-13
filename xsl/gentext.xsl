@@ -51,7 +51,13 @@
 			  $key = 'finished'">
 	    <xsl:choose>
 	      <xsl:when test="$pattern = 'Adj@General Plural@custom-i'">
-		<xsl:text>Open </xsl:text>
+		<xsl:variable name="general">
+		  <xsl:choose>
+		    <xsl:when test="$key = 'finished'">Closed</xsl:when>
+		    <xsl:otherwise>Open</xsl:otherwise>
+		  </xsl:choose>
+		</xsl:variable>
+		<xsl:value-of select="concat($general, ' ')"/>
 		<xsl:value-of select="$custom-i"/>
 	      </xsl:when>
 	      <xsl:otherwise>
