@@ -17,68 +17,61 @@
   </xsl:template>
 
   <xsl:template match="@xml:id" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-idn-var"/>
-    </xsl:variable>
-    <xsl:variable name="val">
-      <xsl:call-template name="decode-idn">
-	<xsl:with-param name="str" select="."/>
-      </xsl:call-template>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
-      <xsl:with-param name="value" select="$val"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-idn-var"/>
+      </xsl:with-param>
+      <xsl:with-param name="value">
+	<xsl:call-template name="decode-idn">
+	  <xsl:with-param name="str" select="."/>
+	</xsl:call-template>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="@pty" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-pty-var"/>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-pty-var"/>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="srs:ttl" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-ttl-var"/>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-ttl-var"/>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="@sts" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-sts-var"/>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-sts-var"/>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="@res" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-res-var"/>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-res-var"/>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="srs:sum" mode="tex-bind">
-    <xsl:variable name="var">
-      <xsl:call-template name="cons-sum-var"/>
-    </xsl:variable>
     <xsl:call-template name="tex-bind">
-      <xsl:with-param name="name" select="$var"/>
+      <xsl:with-param name="name">
+	<xsl:call-template name="cons-sum-var"/>
+      </xsl:with-param>
       <xsl:with-param name="value" select="normalize-space(.)"/>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="srs:*|@*" mode="tex-bind">
-    <!-- Don't bind -->
+    <!-- Don't bind the rest -->
   </xsl:template>
 
 </xsl:stylesheet>
