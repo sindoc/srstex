@@ -224,50 +224,76 @@
     <xsl:param name="content"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="''"/>
-    <xsl:value-of 
-	select="concat($prefix, '\textit{', $content, '}', $suffix)"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="'textit'"/>
+      <xsl:with-param name="arg-1" select="$content"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="tex-bind">
     <xsl:param name="name"/>
     <xsl:param name="value" select="."/>
+    <xsl:param name="content"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="$newline"/>
-    <xsl:value-of 
-	select="concat('\def', $name, '{', $value, '}', $suffix)"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="'def'"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="''"/>
+    </xsl:call-template>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="$name"/>
+      <xsl:with-param name="arg-1" select="$value"/>
+      <xsl:with-param name="prefix" select="''"/>
+      <xsl:with-param name="suffix" select="''"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="tex-index">
     <xsl:param name="entry"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="$newline"/>
-    <xsl:value-of 
-	select="concat($prefix, '\index{', $entry, '}', $suffix)"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="'index'"/>
+      <xsl:with-param name="arg-1" select="$entry"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="tex-label">
-    <xsl:param name="val"/>
-    <xsl:value-of select="concat('\label{', $val, '}')"/>
+    <xsl:param name="marker"/>
+    <xsl:param name="prefix" select="''"/>
+    <xsl:param name="suffix" select="$newline"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="'label'"/>
+      <xsl:with-param name="arg-1" select="$marker"/>
+      <xsl:with-param name="prefix" select="''"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="tex-section">
     <xsl:param name="title"/>
     <xsl:param name="label" select="''"/>
+    <xsl:param name="command" select="'section'"/>
     <xsl:param name="prefix" select="$newline"/>
     <xsl:param name="suffix" select="$newline"/>
-    <xsl:param name="command" select="'section'"/>
 
-    <xsl:value-of select="$prefix"/>
-
-    <xsl:value-of
-	select="concat('\', $command, '{', $title, '}')"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="$command"/>
+      <xsl:with-param name="arg-1" select="$title"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
 
     <xsl:if test="$label != ''">
       <xsl:call-template name="tex-label">
-	<xsl:with-param name="val" select="$label"/>
+	<xsl:with-param name="marker" select="$label"/>
       </xsl:call-template>
     </xsl:if>
-    <xsl:value-of select="$suffix"/>
   </xsl:template>
 
   <xsl:template name="tex-subsubsection">
