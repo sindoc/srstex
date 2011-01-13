@@ -244,7 +244,7 @@
       <xsl:with-param name="suffix" select="''"/>
     </xsl:call-template>
     <xsl:call-template name="tex-command">
-      <xsl:with-param name="name" select="$name"/>
+      <xsl:with-param name="name" select="substring-after($name, '\')"/>
       <xsl:with-param name="arg-1" select="$value"/>
       <xsl:with-param name="prefix" select="''"/>
       <xsl:with-param name="suffix" select="''"/>

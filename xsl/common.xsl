@@ -35,7 +35,10 @@
 	<xsl:with-param name="context" select="$field"/>
       </xsl:call-template>      
     </xsl:variable>
-    <xsl:value-of select="concat('\iPicoReq', $req-idn, $resolved-field)"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name" select="concat('iPicoReq', $req-idn, 
+					  $resolved-field)"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="cons-sum-var">
