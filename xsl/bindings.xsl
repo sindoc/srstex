@@ -34,6 +34,11 @@
       <xsl:with-param name="name">
 	<xsl:call-template name="cons-pty-var"/>
       </xsl:with-param>
+      <xsl:with-param name="value">
+	<xsl:call-template name="gentext">
+	  <xsl:with-param name="key" select="."/>
+	</xsl:call-template>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
@@ -50,6 +55,11 @@
       <xsl:with-param name="name">
 	<xsl:call-template name="cons-sts-var"/>
       </xsl:with-param>
+      <xsl:with-param name="value">
+	<xsl:call-template name="gentext">
+	  <xsl:with-param name="key" select="."/>
+	</xsl:call-template>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
@@ -57,6 +67,11 @@
     <xsl:call-template name="tex-bind">
       <xsl:with-param name="name">
 	<xsl:call-template name="cons-res-var"/>
+      </xsl:with-param>
+      <xsl:with-param name="value">
+	<xsl:call-template name="gentext">
+	  <xsl:with-param name="key" select="."/>
+	</xsl:call-template>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
