@@ -48,29 +48,38 @@
 			  $key = 'accepted' or
 			  $key = 'started'  or
 			  $key = 'reraised' or
-			  $key = 'finished'">
+			  $key = 'closed'">
+	    <xsl:variable name="print-key">
+	      <xsl:call-template name="capitalize">
+		<xsl:with-param name="str" select="$key"/>
+	      </xsl:call-template>
+	    </xsl:variable>
 	    <xsl:choose>
-	      <xsl:when test="$pattern = 'Adj@General Plural@custom-i'">
+	      <xsl:when test="$pattern = 'Adj@general Plural@custom-i'">
 		<xsl:variable name="general">
 		  <xsl:choose>
-		    <xsl:when test="$key = 'finished'">Closed</xsl:when>
+		    <xsl:when test="$key = 'closed'">Resolved</xsl:when>
 		    <xsl:otherwise>Open</xsl:otherwise>
 		  </xsl:choose>
 		</xsl:variable>
-		<xsl:value-of select="concat($general, ' ')"/>
+		<xsl:value-of select="$general"/>
+		<xsl:text> </xsl:text>
+		<xsl:value-of select="$custom-i"/>
+	      </xsl:when>
+	      <xsl:when test="$pattern = 'Adj@key Plural@custom-i'">
+		<xsl:value-of select="$print-key"/>
+		<xsl:text> </xsl:text>
 		<xsl:value-of select="$custom-i"/>
 	      </xsl:when>
 	      <xsl:otherwise>
-		<xsl:call-template name="capitalize">
-		  <xsl:with-param name="str" select="$key"/>
-		</xsl:call-template>
+		<xsl:value-of select="$print-key"/>
 	      </xsl:otherwise>
 	    </xsl:choose>
 	  </xsl:when>
-	  <xsl:when test="$pattern = 'Print'">
+	  <xsl:when test="$pattern = '@print'">
 	    <xsl:value-of select="$print"/>
 	  </xsl:when>
-	  <xsl:when test="$pattern = 'substring-after(Print, custom-i)'">
+	  <xsl:when test="$pattern = 'substring-after(@print, @custom-i)'">
 	    <xsl:value-of select="substring-after($print, $custom-i)"/>
 	  </xsl:when>
 	  <xsl:otherwise>DevelopmentStatus</xsl:otherwise>
@@ -82,22 +91,30 @@
 	  <xsl:when test="$key = 'implemented' or
 			  $key = 'tested'      or
 			  $key = 'dropped'">
+	    <xsl:variable name="print-key">
+	      <xsl:call-template name="capitalize">
+		<xsl:with-param name="str" select="$key"/>
+	      </xsl:call-template>
+	    </xsl:variable>
 	    <xsl:choose>
-	      <xsl:when test="$pattern = 'Adj@General Plural@custom-i'">
-		<xsl:text>Closed </xsl:text>
+	      <xsl:when test="$pattern = 'Adj@general Plural@custom-i'">
+		<xsl:text>Resolved </xsl:text>
+		<xsl:value-of select="$custom-i"/>
+	      </xsl:when>
+	      <xsl:when test="$pattern = 'Adj@key Plural@custom-i'">
+		<xsl:value-of select="$print-key"/>
+		<xsl:text> </xsl:text>
 		<xsl:value-of select="$custom-i"/>
 	      </xsl:when>
 	      <xsl:otherwise>
-		<xsl:call-template name="capitalize">
-		  <xsl:with-param name="str" select="$key"/>
-		</xsl:call-template>
+		<xsl:value-of select="$print-key"/>
 	      </xsl:otherwise>
 	    </xsl:choose>
 	  </xsl:when>
-	  <xsl:when test="$pattern = 'Print'">
+	  <xsl:when test="$pattern = 'print'">
 	    <xsl:value-of select="$print"/>
 	  </xsl:when>
-	  <xsl:when test="$pattern = 'substring-after(Print, custom-i)'">
+	  <xsl:when test="$pattern = 'substring-after(@print, @custom-i)'">
 	    <xsl:value-of select="substring-after($print, $custom-i)"/>
 	  </xsl:when>
 	  <xsl:otherwise>ResolutionStatus</xsl:otherwise>

@@ -3,26 +3,38 @@
 		version="1.0">
 
   <xsl:template name="index-by-status">
+
+    <xsl:variable name="reqs-text">
+      <xsl:call-template name="gentext">
+	<xsl:with-param name="context" select="'reqs'"/>
+      </xsl:call-template>
+    </xsl:variable>
+
     <xsl:call-template name="tex-index">
       <xsl:with-param name="entry">
 	<xsl:call-template name="tex-textbf">
 	  <xsl:with-param name="content">
 	    <xsl:call-template name="gentext">
 	      <xsl:with-param name="key" select="."/>
-	      <xsl:with-param name="custom-i">
-		<xsl:call-template name="gentext">
-		  <xsl:with-param name="context" select="'reqs'"/>
-		</xsl:call-template>
-	      </xsl:with-param>
+	      <xsl:with-param name="custom-i" select="$reqs-text"/>
 	      <xsl:with-param 
-		  name="pattern" select="'Adj@General Plural@custom-i'"/>
+		  name="pattern" select="'Adj@general Plural@custom-i'"/>
 	    </xsl:call-template>	    
+	  </xsl:with-param>
+	</xsl:call-template>
+	<xsl:value-of select="$tex-index-key-sep"/>
+	<xsl:call-template name="tex-textit">
+	  <xsl:with-param name="content">
+	    <xsl:call-template name="gentext">
+	      <xsl:with-param name="key" select="."/>
+	    </xsl:call-template>
 	  </xsl:with-param>
 	</xsl:call-template>
 	<xsl:value-of select="$tex-index-key-sep"/>
 	<xsl:call-template name="cons-ttl-var"/>
       </xsl:with-param>
-    </xsl:call-template>    
+    </xsl:call-template>
+
   </xsl:template>
 
   <xsl:template match="@sts" mode="tex-index">

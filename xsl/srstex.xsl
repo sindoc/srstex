@@ -3,7 +3,7 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-  <xsl:param name="req.fields.size" select="'footnotesize'"/>
+  <xsl:param name="req.fields.size" select="'scriptsize'"/>
 
   <xsl:include href="common.xsl"/>
 
@@ -76,7 +76,7 @@
     <xsl:call-template name="tex-item">
       <xsl:with-param name="label">
 	<xsl:call-template name="gentext">
-	  <xsl:with-param name="pattern" select="'Print'"/>
+	  <xsl:with-param name="pattern" select="'@print'"/>
 	</xsl:call-template>
       </xsl:with-param>
       <xsl:with-param name="content">
@@ -92,7 +92,7 @@
     <xsl:call-template name="tex-item">
       <xsl:with-param name="label">
 	<xsl:call-template name="gentext">
-	  <xsl:with-param name="pattern" select="'Print'"/>
+	  <xsl:with-param name="pattern" select="'@print'"/>
 	</xsl:call-template>
       </xsl:with-param>
       <xsl:with-param name="content">
