@@ -5,11 +5,11 @@
 
   <xsl:output encoding="UTF-8" method="text"/>
 
-  <xsl:template match="srs:in[@name]">
+  <xsl:template match="srs:in[not(@ref)]">
     <xsl:call-template name="io-define"/>
   </xsl:template>
 
-  <xsl:template match="srs:out[@name]">
+  <xsl:template match="srs:out[not(@ref)]">
     <xsl:call-template name="io-define"/>
   </xsl:template>
 
@@ -25,9 +25,10 @@
 
   <xsl:template name="io-format">
     <xsl:param name="ref"/>
-    <xsl:text>(</xsl:text>
-    <xsl:value-of select="$ref"/>
-    <xsl:text>)</xsl:text>
+    <xsl:call-template name="gentext">
+      <xsl:with-param name="pattern" select="'(@abbr@custom-i)'"/>
+      <xsl:with-param name="custom-i" select="$ref"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="srs:in[@ref]">
@@ -52,14 +53,14 @@
     </xsl:call-template>
   </xsl:template>
 
-  <xsl:template match="srs:in[@name]" mode="counter">
+  <xsl:template match="srs:in[not(@ref)]" mode="counter">
     <xsl:value-of 
-	select="count(parent::*/preceding-sibling::*/srs:in[@name]) + 1"/>
+	select="count(parent::*/preceding-sibling::*/srs:in[not(@ref)]) + 1"/>
   </xsl:template>
 
-  <xsl:template match="srs:out[@name]" mode="counter">
+  <xsl:template match="srs:out[not(@ref)]" mode="counter">
     <xsl:value-of 
-	select="count(parent::*/preceding-sibling::*/srs:out[@name]) + 1"/>
+	select="count(parent::*/preceding-sibling::*/srs:out[not(@ref)]) + 1"/>
   </xsl:template>
 
   <xsl:template match="srs:lin">
