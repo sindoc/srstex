@@ -348,4 +348,11 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template name="tex-par">
+    <xsl:param name="content"/>
+    <xsl:param name="prefix" select="''"/>
+    <xsl:param name="suffix" select="$newline"/>
+    <xsl:value-of select="concat($prefix, $content, '\\', $suffix)"/>
+  </xsl:template>
+
 </xsl:stylesheet>

@@ -116,6 +116,43 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template match="srs:par">
+    <xsl:call-template name="tex-par">
+      <xsl:with-param name="content">
+	<xsl:apply-templates/>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="srs:itm">
+    <xsl:if test="srs:par">
+      <xsl:message terminate="yes">
+	<xsl:text>Multiple paragraphs are not allowed in item</xsl:text>
+      </xsl:message>
+    </xsl:if>
+    <xsl:call-template name="tex-item">
+      <xsl:with-param name="content">
+	<xsl:apply-templates/>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="srs:ols">
+    <xsl:call-template name="tex-enumerate">
+      <xsl:with-param name="items">
+	<xsl:apply-templates/>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="srs:uls">
+    <xsl:call-template name="tex-itemize">
+      <xsl:with-param name="items">
+	<xsl:apply-templates/>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
   <xsl:template match="srs:des">
     <xsl:call-template name="tex-subsubsection">
       <xsl:with-param name="title">
