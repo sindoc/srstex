@@ -3,15 +3,14 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-
-  <xsl:param name="lang" select="'en_GB'"/>
+  <xsl:param name="gentext-lang" select="'en_GB'"/>
+  <xsl:param name="gentext-unresolved">Unresolved</xsl:param>
 
   <xsl:template name="gentext">
     <xsl:param name="context" select="local-name(.)"/>
     <xsl:param name="key" select="''"/>
     <xsl:param name="pattern" select="''"/>
     <xsl:param name="custom-i" select="''"/>
-    <xsl:param name="unresolved" select="'Unresolved'"/>
     <xsl:choose>
       <xsl:when test="$context = 'reqs'">Requirements</xsl:when>
       <xsl:when test="$context = 'deps'">Dependencies</xsl:when>
@@ -126,8 +125,38 @@
 	  <xsl:otherwise>Dependency</xsl:otherwise>
 	</xsl:choose>
       </xsl:when>
+      <xsl:when test="$context = 'in' or
+		      $context = 'lin'">
+	<xsl:call-template name="gentext-io">
+	  <xsl:with-param name="pattern" select="$pattern"/>
+	  <xsl:with-param name="abbr">i</xsl:with-param>
+	  <xsl:with-param name="custom-i" select="$custom-i"/>
+	</xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$context = 'out' or
+		      $context = 'lout'">
+	<xsl:call-template name="gentext-io">
+	  <xsl:with-param name="abbr">o</xsl:with-param>
+	  <xsl:with-param name="pattern" select="$pattern"/>
+	  <xsl:with-param name="custom-i" select="$custom-i"/>
+	</xsl:call-template>
+      </xsl:when>
       <xsl:otherwise>
-	<xsl:value-of select="$unresolved"/>
+	<xsl:value-of select="$gentext-unresolved"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="gentext-io">
+    <xsl:param name="abbr"/>
+    <xsl:param name="pattern"/>
+    <xsl:param name="custom-i"/>
+    <xsl:choose>
+      <xsl:when test="$pattern = '(@abbr@custom-i)'">
+	<xsl:value-of select="concat('(', $abbr, $custom-i, ')')"/>
+      </xsl:when>
+      <xsl:otherwise>
+	<xsl:value-of select="$gentext-unresolved"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
