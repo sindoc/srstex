@@ -156,30 +156,21 @@
       </xsl:call-template>
     </xsl:variable>
 
-    <xsl:variable name="dst-ttl-var">
-      <xsl:call-template name="cons-ttl-var">
-	<xsl:with-param name="idn" select="$dst-idn"/>
-      </xsl:call-template>
-    </xsl:variable>
-
-    <xsl:variable name="dst-idn-var">
-      <xsl:call-template name="cons-idn-var">
-	<xsl:with-param name="idn" select="$dst-idn"/>
-      </xsl:call-template>
-    </xsl:variable>
-
-    <xsl:variable name="dst-pageref">
-      <xsl:call-template name="tex-pageref">
-	<xsl:with-param name="marker" select="$dst-idn-var"/>
-      </xsl:call-template>
-    </xsl:variable>
-
     <xsl:call-template name="tex-item">
-      <xsl:with-param 
-	  name="content" 
-	  select="concat($dst-ttl-var, $tex-nbsp, $dst-pageref)"/>
+      <xsl:with-param name="content">
+	<xsl:call-template name="cons-ttl-var">
+	  <xsl:with-param name="idn" select="$dst-idn"/>
+	</xsl:call-template>
+	<xsl:value-of select="$tex-nbsp"/>
+	<xsl:call-template name="tex-pageref">
+	  <xsl:with-param name="marker">
+	    <xsl:call-template name="cons-idn-var">
+	      <xsl:with-param name="idn" select="$dst-idn"/>
+	    </xsl:call-template>
+	  </xsl:with-param>
+	</xsl:call-template>
+      </xsl:with-param>
     </xsl:call-template>
-
   </xsl:template>
 
   <xsl:template name="format-fields">
