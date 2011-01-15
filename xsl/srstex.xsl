@@ -190,7 +190,9 @@
 	 </xsl:call-template>
     -->
     <xsl:call-template name="tex-description">
-      <xsl:with-param name="item-nodes" select="$field-nodes"/>
+      <xsl:with-param name="items">
+	<xsl:apply-templates select="$field-nodes"/>
+      </xsl:with-param>
     </xsl:call-template>
 
   </xsl:template>

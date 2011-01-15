@@ -8,11 +8,11 @@
   <xsl:output encoding="UTF-8" method="text"/>
 
   <xsl:template name="tex-description">
-    <xsl:param name="item-nodes"/>
+    <xsl:param name="items"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="$newline"/>
     <xsl:call-template name="tex-list">
-      <xsl:with-param name="item-nodes" select="$item-nodes"/>
+      <xsl:with-param name="items" select="$items"/>
       <xsl:with-param name="list-type" select="'description'"/>
       <xsl:with-param name="prefix" select="$prefix"/>
       <xsl:with-param name="suffix" select="$suffix"/>
@@ -20,27 +20,37 @@
   </xsl:template>
 
   <xsl:template name="tex-itemize">
-    <xsl:param name="item-nodes"/>
+    <xsl:param name="items"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="$newline"/>
     <xsl:call-template name="tex-list">
-      <xsl:with-param name="item-nodes" select="$item-nodes"/>
+      <xsl:with-param name="items" select="$items"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template name="tex-enumerate">
+    <xsl:param name="items"/>
+    <xsl:param name="prefix" select="''"/>
+    <xsl:param name="suffix" select="$newline"/>
+    <xsl:call-template name="tex-list">
+      <xsl:with-param name="list-type" select="'enumerate'"/>
+      <xsl:with-param name="items" select="$items"/>
       <xsl:with-param name="prefix" select="$prefix"/>
       <xsl:with-param name="suffix" select="$suffix"/>
     </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="tex-list">
-    <xsl:param name="item-nodes"/>
+    <xsl:param name="items"/>
     <xsl:param name="list-type" select="'itemize'"/>
     <xsl:param name="prefix" select="''"/>
     <xsl:param name="suffix" select="$newline"/>
     <xsl:value-of select="$prefix"/>
     <xsl:call-template name="tex-env">
       <xsl:with-param name="name" select="$list-type"/>
-      <xsl:with-param name="content">
-	<xsl:apply-templates select="$item-nodes"/>	
-      </xsl:with-param>
+      <xsl:with-param name="content" select="$items"/>
       <xsl:with-param name="prefix" select="$prefix"/>
       <xsl:with-param name="suffix" select="$suffix"/>
     </xsl:call-template>
@@ -247,7 +257,7 @@
       <xsl:with-param name="name" select="substring-after($name, '\')"/>
       <xsl:with-param name="arg-1" select="$value"/>
       <xsl:with-param name="prefix" select="''"/>
-      <xsl:with-param name="suffix" select="''"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
     </xsl:call-template>
   </xsl:template>
 
