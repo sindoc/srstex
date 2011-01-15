@@ -6,6 +6,7 @@
   <xsl:param name="req.fields.size" select="'scriptsize'"/>
 
   <xsl:include href="common.xsl"/>
+  <xsl:include href="io.xsl"/>
 
   <xsl:output encoding="UTF-8" method="text"/>
 
