@@ -3,8 +3,8 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-  <xsl:param name="gentext-lang" select="'en_GB'"/>
-  <xsl:param name="gentext-unresolved">Unresolved</xsl:param>
+  <xsl:param name="gentext.lang" select="'en_GB'"/>
+  <xsl:param name="gentext.unresolved">Unresolved</xsl:param>
 
   <xsl:template name="gentext">
     <xsl:param name="context" select="local-name(.)"/>
@@ -142,7 +142,7 @@
 	</xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:value-of select="$gentext-unresolved"/>
+	<xsl:value-of select="$gentext.unresolved"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -156,7 +156,7 @@
 	<xsl:value-of select="concat('(', $abbr, $custom-i, ')')"/>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:value-of select="$gentext-unresolved"/>
+	<xsl:value-of select="$gentext.unresolved"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
