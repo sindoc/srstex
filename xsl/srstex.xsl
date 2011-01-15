@@ -218,11 +218,13 @@
 	 <xsl:with-param name="field-nodes" select="$field-nodes"/>
 	 </xsl:call-template>
     -->
-    <xsl:call-template name="tex-description">
-      <xsl:with-param name="items">
-	<xsl:apply-templates select="$field-nodes"/>
-      </xsl:with-param>
-    </xsl:call-template>
+    <xsl:if test="$field-nodes != ''">
+      <xsl:call-template name="tex-description">
+	<xsl:with-param name="items">
+	  <xsl:apply-templates select="$field-nodes"/>
+	</xsl:with-param>
+      </xsl:call-template>
+    </xsl:if>
 
   </xsl:template>
 
