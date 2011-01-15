@@ -117,35 +117,34 @@
   </xsl:template>
 
   <xsl:template match="srs:des">
-    <xsl:variable name="title">
-      <xsl:call-template name="gentext"/>
-    </xsl:variable>
     <xsl:call-template name="tex-subsubsection">
-      <xsl:with-param name="title" select="$title"/>
+      <xsl:with-param name="title">
+	<xsl:call-template name="gentext"/>
+      </xsl:with-param>
     </xsl:call-template>
     <xsl:apply-templates/>
   </xsl:template>
 
   <xsl:template match="srs:use">
-    <xsl:variable name="title">
-      <xsl:call-template name="gentext"/>
-    </xsl:variable>
     <xsl:call-template name="tex-subsubsection">
-      <xsl:with-param name="title" select="$title"/>
+      <xsl:with-param name="title">
+	<xsl:call-template name="gentext"/>
+      </xsl:with-param>
     </xsl:call-template>
     <xsl:apply-templates/>
   </xsl:template>
 
   <xsl:template match="srs:deps">
-    <xsl:variable name="title">
-      <xsl:call-template name="gentext"/>
-    </xsl:variable>
     <xsl:call-template name="tex-subsubsection">
-      <xsl:with-param name="title" select="$title"/>
+      <xsl:with-param name="title">
+	<xsl:call-template name="gentext"/>
+      </xsl:with-param>
     </xsl:call-template>
     <xsl:apply-templates select="srs:dep" mode="tex-index"/>
     <xsl:call-template name="tex-itemize">
-      <xsl:with-param name="item-nodes" select="srs:dep"/>
+      <xsl:with-param name="items">
+	<xsl:apply-templates select="srs:dep"/>
+      </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
 
