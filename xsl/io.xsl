@@ -77,7 +77,7 @@
     <xsl:call-template name="io-format">
       <xsl:with-param name="ref">
 	<xsl:apply-templates 
-	    select="parent::*/preceding-sibling::*[srs:out[not(@ref)]][1]/srs:in" 
+	    select="parent::*/preceding-sibling::*[srs:out[not(@ref)]][1]/srs:out" 
 	    mode="counter"/>
       </xsl:with-param>
     </xsl:call-template>
