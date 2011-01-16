@@ -213,11 +213,6 @@
 
   <xsl:template name="format-fields">
     <xsl:param name="field-nodes"/>
-    <!-- Maybe later, I'll make tabular fields
-	 <xsl:call-template name="make-tabular-fields">
-	 <xsl:with-param name="field-nodes" select="$field-nodes"/>
-	 </xsl:call-template>
-    -->
     <xsl:if test="$field-nodes != ''">
       <xsl:call-template name="tex-description">
 	<xsl:with-param name="items">
