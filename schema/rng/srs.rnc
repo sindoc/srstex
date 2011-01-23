@@ -103,7 +103,7 @@ srs.common.para = element par
 srs.common.text.content.optional = srs.common.lnk
 srs.common.text.content.required = text
 srs.common.text = 
-    srs.common.text.content.optional* 
+    srs.common.text.content.optional? 
   & srs.common.text.content.required
 
 srs.common.text.block.attribs  = 
@@ -118,7 +118,7 @@ srs.common.lnk.attribs = srs.common.ref.attribs
 srs.common.lnk.content.optional = empty
 srs.common.lnk.content.commonuired = empty
 srs.common.lnk.content = 
-  srs.common.lnk.content.optional* & 
+  srs.common.lnk.content.optional? & 
   srs.common.lnk.content.commonuired
 srs.common.lnk = element lnk 
 { srs.common.lnk.attribs,
@@ -212,12 +212,12 @@ srs.req.attribs = srs.common.attribs
   & srs.req.pty 
   & srs.req.sts 
   & srs.req.res?
-srs.req.content.optional = srs.req.des | srs.req.use | srs.req.deps
+srs.req.content.optional = srs.req.des? & srs.req.use? & srs.req.deps?
 srs.req.content.required = 
     srs.req.ttl 
   & srs.req.sum
 srs.req.content = 
-  srs.req.content.optional* & 
+  srs.req.content.optional? & 
   srs.req.content.required
 
 srs.req = element req 
