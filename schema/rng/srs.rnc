@@ -196,12 +196,12 @@ srs.req.attribs = srs.common.attribs
   & srs.req.pty 
   & srs.req.sts 
   & srs.req.res?
-srs.req.content.optional = srs.req.des & srs.req.use & srs.req.deps
+srs.req.content.optional = srs.req.des | srs.req.use | srs.req.deps
 srs.req.content.required = 
     srs.req.ttl 
   & srs.req.sum
 srs.req.content = 
-  srs.req.content.optional? & 
+  srs.req.content.optional* & 
   srs.req.content.required
 
 srs.req = element req 
