@@ -64,7 +64,9 @@ srs.common.io = srs.common.io.input | srs.common.io.output
 
 srs.common.list.item.attribs = srs.common.attribs
 srs.common.list.item.content.optional = empty
-srs.common.list.item.content.required = (text | srs.common.io)+
+srs.common.list.item.content.required = (
+    srs.common.text 
+  | srs.common.io )+
 srs.common.list.item.content = 
     srs.common.list.item.content.optional?
   & srs.common.list.item.content.required
