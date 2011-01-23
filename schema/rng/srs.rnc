@@ -14,7 +14,7 @@ srs.common.role.attrib      = attribute role { text }
 srs.common.ref.attrib       = attribute ref { xsd:IDREF }
 srs.common.id.attrib        = attribute xml:id { xsd:ID }
 srs.common.id.local.attrib  = attribute name { text }
-srs.common.ref.local.attrib  = attribute ref { text }
+srs.common.ref.local.attrib = attribute ref { text }
 
 srs.common.attribs = srs.common.role.attrib?
 srs.common.id.attribs = srs.common.id.attrib
@@ -22,13 +22,15 @@ srs.common.id.local.attribs = srs.common.id.local.attrib?
 srs.common.ref.attribs = srs.common.ref.attrib
 srs.common.ref.local.attribs = srs.common.ref.local.attrib
 srs.common.io.attribs = srs.common.attribs
-srs.common.io.ref.attribs = (
-   srs.common.ref.local.attribs 
- | srs.common.id.local.attribs )?
+srs.common.io.ref.attribs = ( 
+    srs.common.ref.local.attribs 
+  | srs.common.id.local.attribs)?
 srs.common.io.content.optional = empty
 srs.common.io.content.required = text | empty
 
-srs.common.io.in.attribs = srs.common.io.ref.attribs & srs.common.io.attribs
+srs.common.io.in.attribs = 
+    srs.common.io.ref.attribs 
+  & srs.common.io.attribs
 srs.common.io.in.content.optional = srs.common.io.content.optional
 srs.common.io.in.content.required = srs.common.io.content.required
 srs.common.io.in.content =
@@ -39,7 +41,9 @@ srs.common.io.in = element in {
   srs.common.io.in.content 
 }
 
-srs.common.io.out.attribs = srs.common.io.ref.attribs & srs.common.io.attribs
+srs.common.io.out.attribs = 
+    srs.common.io.ref.attribs 
+  & srs.common.io.attribs
 srs.common.io.out.content.optional = srs.common.io.content.optional
 srs.common.io.out.content.required = srs.common.io.content.required
 srs.common.io.out.content =
@@ -147,7 +151,7 @@ srs.req.res.enum =
 
 srs.req.res = attribute res { srs.req.res.enum }
 
-srs.req.dep.attribs = srs.common.text.block.attribs & srs.common.ref.attribs
+srs.req.dep.attribs = srs.common.ref.attribs
 srs.req.dep.content.optional = empty
 srs.req.dep.content.required = empty
 srs.req.dep.content = 
@@ -212,7 +216,10 @@ srs.req.attribs = srs.common.attribs
   & srs.req.pty 
   & srs.req.sts 
   & srs.req.res?
-srs.req.content.optional = srs.req.des? & srs.req.use? & srs.req.deps?
+srs.req.content.optional = 
+    srs.req.des? 
+  & srs.req.use? 
+  & srs.req.deps?
 srs.req.content.required = 
     srs.req.ttl 
   & srs.req.sum
