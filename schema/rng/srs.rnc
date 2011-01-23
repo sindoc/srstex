@@ -1,0 +1,213 @@
+# Author: Sina K. Heshmati
+# $Id$
+# Legal Notice: http://www.gnu.org/licenses/gpl-3.0.html
+
+namespace srs = "http://sina.khakbaz.com/2011/01/srs/ns"
+namespace xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+default namespace = "http://sina.khakbaz.com/2011/01/srs/ns"
+namespace s   = "http://www.ascc.net/xml/schematron"
+
+start = srs.reqs
+
+srs.common.text.type.attrib = attribute type { "tex" | "xhtml" | "docbook" }
+srs.common.role.attrib      = attribute role { text }
+srs.common.ref.attrib       = attribute ref { xsd:IDREF }
+srs.common.id.attrib        = attribute xml:id { xsd:ID }
+srs.common.id.local.attrib  = attribute name { text }
+srs.common.ref.local.attrib  = attribute ref { text }
+
+srs.common.attribs = srs.common.role.attrib?
+srs.common.id.attribs = srs.common.id.attrib
+srs.common.id.local.attribs = srs.common.id.local.attrib?
+srs.common.ref.attribs = srs.common.ref.attrib
+srs.common.ref.local.attribs = srs.common.ref.local.attrib
+srs.common.io.attribs = srs.common.attribs
+srs.common.io.ref.attribs = (
+   srs.common.ref.local.attribs 
+ | srs.common.id.local.attribs )?
+srs.common.io.content.optional = empty
+srs.common.io.content.required = text | empty
+
+srs.common.io.in.attribs = srs.common.io.ref.attribs & srs.common.io.attribs
+srs.common.io.in.content.optional = srs.common.io.content.optional
+srs.common.io.in.content.required = srs.common.io.content.required
+srs.common.io.in.content =
+    srs.common.io.in.content.optional?
+  & srs.common.io.in.content.required
+srs.common.io.in = element in { 
+  srs.common.io.in.attribs,
+  srs.common.io.in.content 
+}
+
+srs.common.io.out.attribs = srs.common.io.ref.attribs & srs.common.io.attribs
+srs.common.io.out.content.optional = srs.common.io.content.optional
+srs.common.io.out.content.required = srs.common.io.content.required
+srs.common.io.out.content =
+    srs.common.io.out.content.optional?
+  & srs.common.io.out.content.required
+srs.common.io.out = element out { 
+  srs.common.io.out.attribs,
+  srs.common.io.out.content 
+}
+
+srs.common.io.lin  = element lin  { empty }
+srs.common.io.lout = element lout { empty }
+
+srs.common.io.input  = srs.common.io.in  | srs.common.io.lin
+srs.common.io.output = srs.common.io.out | srs.common.io.lout
+
+srs.common.io = srs.common.io.input | srs.common.io.output
+
+srs.common.list.item.attribs = srs.common.attribs
+srs.common.list.item.content.optional = empty
+srs.common.list.item.content.required = (text | srs.common.io)+
+srs.common.list.item.content = 
+    srs.common.list.item.content.optional?
+  & srs.common.list.item.content.required
+srs.common.list.item = element itm
+{ srs.common.list.item.attribs,
+  srs.common.list.item.content }
+
+srs.common.list.ordered.attribs = srs.common.attribs
+srs.common.list.ordered.content.optional = empty
+srs.common.list.ordered.content.required = srs.common.list.item+
+srs.common.list.ordered.content = 
+    srs.common.list.ordered.content.optional?
+  & srs.common.list.ordered.content.required
+srs.common.list.ordered = element ols 
+{ srs.common.list.ordered.attribs,
+  srs.common.list.ordered.content }
+
+srs.common.list.unordered = element uls 
+{ empty }
+
+srs.common.list = srs.common.list.ordered | srs.common.list.unordered
+
+srs.common.para.attribs = srs.common.attribs
+srs.common.para.content.optional = empty
+srs.common.para.content.required = text
+srs.common.para.content = 
+    srs.common.para.content.optional?
+  & srs.common.para.content.required
+srs.common.para = element par 
+{ srs.common.para.attribs,
+  srs.common.para.content }
+
+srs.common.text.attribs  = 
+    srs.common.attribs 
+  & srs.common.text.type.attrib?
+srs.common.text.content.optional = empty
+srs.common.text.content.required = text
+  | ( srs.common.list 
+    | srs.common.para)+
+
+srs.req.pty.enum = 
+    "critical"
+  | "high"
+  | "medium"
+  | "low"
+srs.req.pty = attribute pty { srs.req.pty.enum }
+
+srs.req.sts.enum = 
+    "raised"
+  | "accepted"
+  | "started"
+  | "reraised"
+  | "closed"
+
+srs.req.sts = attribute sts { srs.req.sts.enum }
+
+srs.req.res.enum = 
+    "implemented"
+  | "tested"
+  | "dropped"
+
+srs.req.res = attribute res { srs.req.res.enum }
+
+srs.req.dep.attribs = srs.common.text.attribs & srs.common.ref.attribs
+srs.req.dep.content.optional = empty
+srs.req.dep.content.required = empty
+srs.req.dep.content = 
+  srs.req.dep.content.optional? & 
+  srs.req.dep.content.required
+srs.req.dep = element dep 
+{ srs.req.dep.attribs,
+  srs.req.dep.content }
+
+srs.req.deps.attribs = srs.common.text.attribs
+srs.req.deps.content.optional = empty
+srs.req.deps.content.required = srs.req.dep
+srs.req.deps.content = 
+  srs.req.deps.content.optional? & 
+  srs.req.deps.content.required
+srs.req.deps = element deps 
+{ srs.req.deps.attribs,
+  srs.req.deps.content }
+
+srs.req.use.attribs = srs.common.text.attribs
+srs.req.use.content.optional = srs.common.text.content.optional
+srs.req.use.content.required = srs.common.text.content.required
+srs.req.use.content = 
+  srs.req.use.content.optional? & 
+  srs.req.use.content.required
+srs.req.use = element use 
+{ srs.req.use.attribs,
+  srs.req.use.content }
+
+srs.req.des.attribs = srs.common.text.attribs
+srs.req.des.content.optional = srs.common.text.content.optional
+srs.req.des.content.required = srs.common.text.content.required
+srs.req.des.content = 
+  srs.req.des.content.optional? & 
+  srs.req.des.content.required
+srs.req.des = element des 
+{ srs.req.des.attribs,
+  srs.req.des.content }
+
+srs.req.sum.attribs = srs.common.attribs
+srs.req.sum.content.optional = empty
+srs.req.sum.content.required = text
+srs.req.sum.content = 
+  srs.req.sum.content.optional? & 
+  srs.req.sum.content.required
+srs.req.sum = element sum 
+{ srs.req.sum.attribs,
+  srs.req.sum.content }
+
+srs.req.ttl.attribs = srs.common.attribs
+srs.req.ttl.content.optional = empty
+srs.req.ttl.content.required = text
+srs.req.ttl.content = 
+  srs.req.ttl.content.optional? & 
+  srs.req.ttl.content.required
+srs.req.ttl = element ttl 
+{ srs.req.ttl.attribs,
+  srs.req.ttl.content }
+
+srs.req.attribs = srs.common.attribs 
+  & srs.common.id.attribs
+  & srs.req.pty 
+  & srs.req.sts 
+  & srs.req.res?
+srs.req.content.optional = srs.req.des & srs.req.use & srs.req.deps
+srs.req.content.required = 
+    srs.req.ttl 
+  & srs.req.sum
+srs.req.content = 
+  srs.req.content.optional? & 
+  srs.req.content.required
+
+srs.req = element req 
+{ srs.req.attribs,
+  srs.req.content }
+
+srs.reqs.attribs = srs.common.attribs
+srs.reqs.content.optional = empty
+srs.reqs.content.required = srs.req*
+srs.reqs.content = 
+  srs.reqs.content.optional? & 
+  srs.reqs.content.required
+
+srs.reqs = element reqs 
+{ srs.reqs.attribs,
+  srs.reqs.content }
