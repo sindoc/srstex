@@ -78,8 +78,15 @@ srs.common.list.ordered = element ols
 { srs.common.list.ordered.attribs,
   srs.common.list.ordered.content }
 
+srs.common.list.unordered.attribs = srs.common.attribs
+srs.common.list.unordered.content.optional = empty
+srs.common.list.unordered.content.required = srs.common.list.item+
+srs.common.list.unordered.content = 
+    srs.common.list.unordered.content.optional?
+  & srs.common.list.unordered.content.required
 srs.common.list.unordered = element uls 
-{ empty }
+{ srs.common.list.unordered.attribs,
+  srs.common.list.unordered.content }
 
 srs.common.list = srs.common.list.ordered | srs.common.list.unordered
 
