@@ -4,8 +4,8 @@
 
 namespace srs = "http://sina.khakbaz.com/2011/01/srs/ns"
 namespace xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+namespace sch = "http://www.ascc.net/xml/schematron"
 default namespace = "http://sina.khakbaz.com/2011/01/srs/ns"
-namespace s   = "http://www.ascc.net/xml/schematron"
 
 start = srs.reqs
 
