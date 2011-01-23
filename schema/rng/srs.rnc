@@ -92,7 +92,7 @@ srs.common.list = srs.common.list.ordered | srs.common.list.unordered
 
 srs.common.para.attribs = srs.common.attribs
 srs.common.para.content.optional = empty
-srs.common.para.content.required = text
+srs.common.para.content.required = srs.common.text
 srs.common.para.content = 
     srs.common.para.content.optional?
   & srs.common.para.content.required
@@ -100,13 +100,29 @@ srs.common.para = element par
 { srs.common.para.attribs,
   srs.common.para.content }
 
-srs.common.text.attribs  = 
+srs.common.text.content.optional = srs.common.lnk
+srs.common.text.content.required = text
+srs.common.text = 
+    srs.common.text.content.optional* 
+  & srs.common.text.content.required
+
+srs.common.text.block.attribs  = 
     srs.common.attribs 
   & srs.common.text.type.attrib?
-srs.common.text.content.optional = empty
-srs.common.text.content.required = text
+srs.common.text.block.content.optional = empty
+srs.common.text.block.content.required = srs.common.text
   | ( srs.common.list 
     | srs.common.para)+
+
+srs.common.lnk.attribs = srs.common.ref.attribs
+srs.common.lnk.content.optional = empty
+srs.common.lnk.content.commonuired = empty
+srs.common.lnk.content = 
+  srs.common.lnk.content.optional* & 
+  srs.common.lnk.content.commonuired
+srs.common.lnk = element lnk 
+{ srs.common.lnk.attribs,
+  srs.common.lnk.content }
 
 srs.req.pty.enum = 
     "critical"
@@ -131,7 +147,7 @@ srs.req.res.enum =
 
 srs.req.res = attribute res { srs.req.res.enum }
 
-srs.req.dep.attribs = srs.common.text.attribs & srs.common.ref.attribs
+srs.req.dep.attribs = srs.common.text.block.attribs & srs.common.ref.attribs
 srs.req.dep.content.optional = empty
 srs.req.dep.content.required = empty
 srs.req.dep.content = 
@@ -141,7 +157,7 @@ srs.req.dep = element dep
 { srs.req.dep.attribs,
   srs.req.dep.content }
 
-srs.req.deps.attribs = srs.common.text.attribs
+srs.req.deps.attribs = srs.common.text.block.attribs
 srs.req.deps.content.optional = empty
 srs.req.deps.content.required = srs.req.dep
 srs.req.deps.content = 
@@ -151,9 +167,9 @@ srs.req.deps = element deps
 { srs.req.deps.attribs,
   srs.req.deps.content }
 
-srs.req.use.attribs = srs.common.text.attribs
-srs.req.use.content.optional = srs.common.text.content.optional
-srs.req.use.content.required = srs.common.text.content.required
+srs.req.use.attribs = srs.common.text.block.attribs
+srs.req.use.content.optional = srs.common.text.block.content.optional
+srs.req.use.content.required = srs.common.text.block.content.required
 srs.req.use.content = 
   srs.req.use.content.optional? & 
   srs.req.use.content.required
@@ -161,9 +177,9 @@ srs.req.use = element use
 { srs.req.use.attribs,
   srs.req.use.content }
 
-srs.req.des.attribs = srs.common.text.attribs
-srs.req.des.content.optional = srs.common.text.content.optional
-srs.req.des.content.required = srs.common.text.content.required
+srs.req.des.attribs = srs.common.text.block.attribs
+srs.req.des.content.optional = srs.common.text.block.content.optional
+srs.req.des.content.required = srs.common.text.block.content.required
 srs.req.des.content = 
   srs.req.des.content.optional? & 
   srs.req.des.content.required
