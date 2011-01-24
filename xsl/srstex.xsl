@@ -194,16 +194,32 @@
       </xsl:call-template>
     </xsl:variable>
 
+    <xsl:variable name="dst-idn-var">
+      <xsl:call-template name="cons-idn-var">
+	<xsl:with-param name="idn" select="$dst-idn"/>
+      </xsl:call-template>      
+    </xsl:variable>
+
     <xsl:call-template name="tex-item">
       <xsl:with-param name="content">
-	<xsl:call-template name="cons-ttl-var">
-	  <xsl:with-param name="idn" select="$dst-idn"/>
-	</xsl:call-template>
-	<xsl:value-of select="$tex-nbsp"/>
-	<xsl:call-template name="tex-pageref">
-	  <xsl:with-param name="marker">
-	    <xsl:call-template name="cons-idn-var">
+	<xsl:call-template name="gentext">
+	  <xsl:with-param name="key" select="@ref"/>
+	  <xsl:with-param 
+	      name="pattern" 
+	      select="'Noun@custom-i~(@custom-ii PageNr@custom-iii)'"/>
+	  <xsl:with-param name="custom-i">
+	    <xsl:call-template name="cons-ttl-var">
 	      <xsl:with-param name="idn" select="$dst-idn"/>
+	    </xsl:call-template>
+	  </xsl:with-param>
+	  <xsl:with-param name="custom-ii">
+	    <xsl:call-template name="tex-ref">
+	      <xsl:with-param name="marker" select="$dst-idn-var"/>
+	    </xsl:call-template>
+	  </xsl:with-param>
+	  <xsl:with-param name="custom-iii">
+	    <xsl:call-template name="tex-pageref">
+	      <xsl:with-param name="marker" select="$dst-idn-var"/>
 	    </xsl:call-template>
 	  </xsl:with-param>
 	</xsl:call-template>
@@ -217,13 +233,13 @@
 	<xsl:with-param name="str" select="@ref"/>
       </xsl:call-template>
     </xsl:variable>
-
+    
     <xsl:variable name="dst-idn-var">
       <xsl:call-template name="cons-idn-var">
 	<xsl:with-param name="idn" select="$dst-idn"/>
       </xsl:call-template>      
     </xsl:variable>
-
+    
     <xsl:call-template name="gentext">
       <xsl:with-param name="key" select="@ref"/>
       <xsl:with-param name="pattern" select="'Noun@custom-i~``Noun@custom-ii&quot;~(@custom-iii PageNr@custom-iv)'"/>

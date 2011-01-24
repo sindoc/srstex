@@ -125,6 +125,19 @@
       <xsl:when test="$context = 'dep'">
 	<xsl:choose>
 	  <xsl:when test="$pattern = 'Verb'">Depends on</xsl:when>
+	  <xsl:when test="starts-with($key, 'r')">
+	    <xsl:choose>
+	      <xsl:when 
+		  test="$pattern = 
+			'Noun@custom-i~(@custom-ii PageNr@custom-iii)'">
+		<xsl:value-of select="concat($custom-i, '~(', $custom-ii,
+				      '~p.~', $custom-iii, ')')"/>
+	      </xsl:when>
+	      <xsl:otherwise>
+		<xsl:value-of select="$key"/>
+	      </xsl:otherwise>
+	    </xsl:choose>
+	  </xsl:when>
 	  <xsl:otherwise>Dependency</xsl:otherwise>
 	</xsl:choose>
       </xsl:when>
