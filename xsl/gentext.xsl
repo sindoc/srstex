@@ -11,6 +11,9 @@
     <xsl:param name="key" select="''"/>
     <xsl:param name="pattern" select="''"/>
     <xsl:param name="custom-i" select="''"/>
+    <xsl:param name="custom-ii" select="''"/>
+    <xsl:param name="custom-iii" select="''"/>
+    <xsl:param name="custom-iv" select="''"/>
     <xsl:choose>
       <xsl:when test="$context = 'reqs'">Requirements</xsl:when>
       <xsl:when test="$context = 'deps'">Dependencies</xsl:when>
@@ -140,6 +143,21 @@
 	  <xsl:with-param name="pattern" select="$pattern"/>
 	  <xsl:with-param name="custom-i" select="$custom-i"/>
 	</xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$context = 'lnk'">
+	<xsl:choose>
+	  <xsl:when test="starts-with($key, 'r')">
+	    <xsl:choose>
+	      <xsl:when test="$pattern = 'Noun@custom-i~``Noun@custom-ii&quot;~(@custom-iii PageNr@custom-iv)'">
+		<xsl:value-of select="concat($custom-i, '~``', $custom-ii, '&quot;~(', $custom-iii, '~p.~', $custom-iv, ')')"/>
+	      </xsl:when>
+	      <xsl:otherwise>
+		<xsl:value-of select="$key"/>
+	      </xsl:otherwise>
+	    </xsl:choose>
+	  </xsl:when>
+	  <xsl:otherwise>Link</xsl:otherwise>
+	</xsl:choose>
       </xsl:when>
       <xsl:otherwise>
 	<xsl:value-of select="$gentext.unresolved"/>

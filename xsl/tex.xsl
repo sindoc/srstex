@@ -152,6 +152,18 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template name="tex-ref">
+    <xsl:param name="marker"/>
+    <xsl:param name="prefix" select="''"/>
+    <xsl:param name="suffix" select="''"/>
+    <xsl:call-template name="tex-command">
+      <xsl:with-param name="name"   select="'ref'"/>
+      <xsl:with-param name="arg-1"  select="$marker"/>
+      <xsl:with-param name="prefix" select="$prefix"/>
+      <xsl:with-param name="suffix" select="$suffix"/>
+    </xsl:call-template>
+  </xsl:template>
+
   <xsl:template name="tex-size-dispatcher">
     <xsl:param name="command" select="''"/>
     <xsl:param name="content" select="''"/>
