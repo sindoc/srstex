@@ -165,7 +165,7 @@ srs.req.dep = element dep
 
 srs.req.deps.attribs = srs.common.text.block.attribs
 srs.req.deps.content.optional = empty
-srs.req.deps.content.required = srs.req.dep
+srs.req.deps.content.required = srs.req.dep+
 srs.req.deps.content = 
   srs.req.deps.content.optional? & 
   srs.req.deps.content.required
