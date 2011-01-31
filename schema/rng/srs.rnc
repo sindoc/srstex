@@ -62,6 +62,16 @@ srs.common.io.output = srs.common.io.out | srs.common.io.lout
 
 srs.common.io = srs.common.io.input | srs.common.io.output
 
+srs.common.ttl.attribs = srs.common.attribs
+srs.common.ttl.content.optional = empty
+srs.common.ttl.content.commonuired = text
+srs.common.ttl.content = 
+  srs.common.ttl.content.optional? & 
+  srs.common.ttl.content.commonuired
+srs.common.ttl = element ttl 
+{ srs.common.ttl.attribs,
+  srs.common.ttl.content }
+
 srs.common.list.item.attribs = srs.common.attribs
 srs.common.list.item.content.optional = empty
 srs.common.list.item.content.required = (
@@ -74,9 +84,13 @@ srs.common.list.item = element itm
 { srs.common.list.item.attribs,
   srs.common.list.item.content }
 
+srs.common.list.ttl = srs.common.ttl
+srs.common.list.content.optional = srs.common.list.ttl
+srs.common.list.content.required = srs.common.list.item+
+
 srs.common.list.ordered.attribs = srs.common.attribs
-srs.common.list.ordered.content.optional = empty
-srs.common.list.ordered.content.required = srs.common.list.item+
+srs.common.list.ordered.content.optional = srs.common.list.content.optional
+srs.common.list.ordered.content.required = srs.common.list.content.required
 srs.common.list.ordered.content = 
     srs.common.list.ordered.content.optional?
   & srs.common.list.ordered.content.required
@@ -85,8 +99,8 @@ srs.common.list.ordered = element ols
   srs.common.list.ordered.content }
 
 srs.common.list.unordered.attribs = srs.common.attribs
-srs.common.list.unordered.content.optional = empty
-srs.common.list.unordered.content.required = srs.common.list.item+
+srs.common.list.unordered.content.optional = srs.common.list.content.optional
+srs.common.list.unordered.content.required = srs.common.list.content.required
 srs.common.list.unordered.content = 
     srs.common.list.unordered.content.optional?
   & srs.common.list.unordered.content.required
@@ -203,15 +217,7 @@ srs.req.sum = element sum
 { srs.req.sum.attribs,
   srs.req.sum.content }
 
-srs.req.ttl.attribs = srs.common.attribs
-srs.req.ttl.content.optional = empty
-srs.req.ttl.content.required = text
-srs.req.ttl.content = 
-  srs.req.ttl.content.optional? & 
-  srs.req.ttl.content.required
-srs.req.ttl = element ttl 
-{ srs.req.ttl.attribs,
-  srs.req.ttl.content }
+srs.req.ttl = srs.common.ttl
 
 srs.req.attribs = srs.common.attribs 
   & srs.common.id.attribs

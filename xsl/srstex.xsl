@@ -47,6 +47,17 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template match="srs:ols/srs:ttl|srs:uls/srs:ttl">
+    <xsl:call-template name="tex-textbf">
+      <xsl:with-param name="content">
+	<xsl:call-template name="tex-size-dispatcher">
+	  <xsl:with-param name="command" select="'Large'"/>
+	  <xsl:with-param name="content" select="."/>
+	</xsl:call-template>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
   <xsl:template match="@xml:id">
     <xsl:call-template name="tex-item">
       <xsl:with-param name="label">
@@ -138,15 +149,21 @@
     </xsl:call-template>
   </xsl:template>
 
+  <xsl:template name="list-title">
+    <xsl:apply-templates select="srs:ttl"/>
+  </xsl:template>
+
   <xsl:template match="srs:ols">
+    <xsl:call-template name="list-title"/>
     <xsl:call-template name="tex-enumerate">
       <xsl:with-param name="items">
-	<xsl:apply-templates/>
+	<xsl:apply-templates select="srs:itm"/>
       </xsl:with-param>
-    </xsl:call-template>
+    </xsl:call-template>    
   </xsl:template>
 
   <xsl:template match="srs:uls">
+    <xsl:call-template name="list-title"/>
     <xsl:call-template name="tex-itemize">
       <xsl:with-param name="items">
 	<xsl:apply-templates/>
