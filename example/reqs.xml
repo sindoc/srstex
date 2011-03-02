@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<reqs xmlns="http://sina.khakbaz.com/2011/01/srs/ns">
+<req xml:id="rCreateAccount" pty="high" sts="started">
+  <ttl>Create User Account</ttl>
+  <sum>Ability for users to register on the Website</sum>
+  <des>
+    Users of the Website should be to open an account. An account can
+    be used to store information that's specific to its owner.
+  </des>
+  <use>
+    <ols>
+      <ttl>Steps to Creating an Account</ttl>
+      <itm><in>Click</in> on the register link</itm>
+      <itm><lin/> yields a page with a form</itm>
+      <itm>Enter your <in name="name">screen name</in></itm>
+      <itm>Enter your <in name="email">email address</in></itm>
+    </ols>
+  </use>
+</req>
+<req xml:id="rLogin" pty="high" sts="accepted">
+  <ttl>Login</ttl>
+  <sum>Enter the Website using an account</sum>
+  <des>
+    Users that have an account should be able to enter the Website using
+    the same account again.
+  </des>
+  <deps>
+    <dep ref="rCreateAccount"/>
+  </deps>
+</req>
+</reqs>

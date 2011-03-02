@@ -1,2 +1,33 @@
 These are an experimental set of stylesheets to generate LaTeX from a custom
 XML format for specifying software requirements.
+
+Usage
+=====
+
+1) Author software requirements in an XML document (1). For an example XML 
+   input, please see 'example/reqs.xml'.
+
+2) Use (1) to generate a LaTeX file that only contains bindings:
+
+  $ cd example (*)
+  $ xsltproc ../xsl/bindings.xsl reqs.xml >reqs-bindings.tex
+
+3) Use (1) to generate LaTeX source:
+
+  $ xsltproc ../xsl/srstex.xsl reqs.xml >reqs.tex
+
+4) Include 'reqs-bindings.tex' in LaTeX preamble.
+
+5) Include 'reqs.tex' where you want the list of your requirements
+   to appear.
+
+(*) There's also a Makefile under the 'example' directory that captures 
+    the above tasks. Simply type 'make' under the 'example' directory.
+
+Notes
+-----
+1) Requirement identifiers must all be prefixed with 'r' e.g.:
+
+  <req xml:id="rLunchRocket">
+  ...
+  </req>
