@@ -15,7 +15,7 @@
 
   <xsl:template name="io-define">
     <xsl:apply-templates/>
-    <xsl:value-of select="$tex-nbsp"/>
+    <xsl:value-of select="$tex.nbsp"/>
     <xsl:call-template name="io-format">
       <xsl:with-param name="ref">
 	<xsl:apply-templates select="." mode="counter"/>

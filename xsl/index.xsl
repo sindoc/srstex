@@ -22,7 +22,7 @@
 	    </xsl:call-template>	    
 	  </xsl:with-param>
 	</xsl:call-template>
-	<xsl:value-of select="$tex-index-key-sep"/>
+	<xsl:value-of select="$tex.index.key.sep"/>
 	<xsl:call-template name="tex-textit">
 	  <xsl:with-param name="content">
 	    <xsl:call-template name="gentext">
@@ -30,7 +30,7 @@
 	    </xsl:call-template>
 	  </xsl:with-param>
 	</xsl:call-template>
-	<xsl:value-of select="$tex-index-key-sep"/>
+	<xsl:value-of select="$tex.index.key.sep"/>
 	<xsl:call-template name="cons-ttl-var"/>
       </xsl:with-param>
     </xsl:call-template>
@@ -53,11 +53,11 @@
     
     <xsl:variable name="entry">
       <xsl:value-of select="$key"/>
-      <xsl:value-of select="$tex-index-val-sep"/>
+      <xsl:value-of select="$tex.index.val.sep"/>
       <xsl:call-template name="tex-textbf">
 	<xsl:with-param name="content" select="$key"/>
       </xsl:call-template>
-      <xsl:value-of select="$tex-index-key-sep"/>
+      <xsl:value-of select="$tex.index.key.sep"/>
       <xsl:call-template name="cons-sum-var"/>
     </xsl:variable>
     
@@ -81,16 +81,16 @@
 	<xsl:with-param name="pattern" 
 			select="'Adj@key Noun@context Plural@custom-i'"/>
       </xsl:call-template>
-      <xsl:value-of select="$tex-nbsp"/>
+      <xsl:value-of select="$tex.nbsp"/>
     </xsl:variable>
 
     <xsl:variable name="entry">
       <xsl:value-of select="$key"/>
-      <xsl:value-of select="$tex-index-val-sep"/>
+      <xsl:value-of select="$tex.index.val.sep"/>
       <xsl:call-template name="tex-textbf">
 	<xsl:with-param name="content" select="$key"/>
       </xsl:call-template>
-      <xsl:value-of select="$tex-index-key-sep"/>
+      <xsl:value-of select="$tex.index.key.sep"/>
       <xsl:call-template name="cons-ttl-var"/>
     </xsl:variable>
     
@@ -136,15 +136,15 @@
 
     <xsl:variable name="entry">
       <xsl:value-of select="$key"/>
-      <xsl:value-of select="$tex-index-val-sep"/>
+      <xsl:value-of select="$tex.index.val.sep"/>
       <xsl:call-template name="tex-textbf">
 	<xsl:with-param name="content" select="$key"/>
       </xsl:call-template>
-      <xsl:value-of select="$tex-index-key-sep"/>
+      <xsl:value-of select="$tex.index.key.sep"/>
       <xsl:call-template name="tex-textit">
 	<xsl:with-param name="content" select="$verb"/>
       </xsl:call-template>
-      <xsl:value-of select="$tex-index-key-sep"/>
+      <xsl:value-of select="$tex.index.key.sep"/>
       <xsl:call-template name="cons-ttl-var">
 	<xsl:with-param name="idn" select="$dst-idn"/>
       </xsl:call-template>

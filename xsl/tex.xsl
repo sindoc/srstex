@@ -1,10 +1,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		version="1.0">
 
-  <xsl:param name="tex-nbsp" select="'~'"/>
-  <xsl:param name="tex-index-key-sep" select="'!'"/>
-  <xsl:param name="tex-index-val-sep" select="'@'"/>
-
   <xsl:output encoding="UTF-8" method="text"/>
 
   <xsl:template name="tex-description">

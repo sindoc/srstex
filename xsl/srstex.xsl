@@ -3,8 +3,6 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-  <xsl:param name="req.fields.size" select="'footnotesize'"/>
-
   <xsl:include href="common.xsl"/>
   <xsl:include href="io.xsl"/>
 

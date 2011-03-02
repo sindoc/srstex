@@ -3,9 +3,6 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-  <xsl:param name="gentext.lang" select="'en_GB'"/>
-  <xsl:param name="gentext.unresolved">Unresolved</xsl:param>
-
   <xsl:template name="gentext">
     <xsl:param name="context" select="local-name(.)"/>
     <xsl:param name="key" select="''"/>

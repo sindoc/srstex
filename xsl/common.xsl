@@ -3,9 +3,7 @@
     xmlns:srs="http://sina.khakbaz.com/2011/01/srs/ns"
     version="1.0">
 
-  <xsl:param name="newline" select="'&#10;'"/>
-  <xsl:param name="req.idn.prefix"></xsl:param>
-
+  <xsl:include href="params.xsl"/>
   <xsl:include href="gentext.xsl"/>
   <xsl:include href="tex.xsl"/>
   <xsl:include href="index.xsl"/>
@@ -16,12 +14,12 @@
 
   <xsl:template name="decode-idn">
     <xsl:param name="str"/>
-    <xsl:value-of select="substring-after($str, 'r')"/>
+    <xsl:value-of select="substring-after($str, $req.idn.input.prefix)"/>
   </xsl:template>
 
   <xsl:template name="cons-req-label">
-    <xsl:if test="$req.idn.prefix != ''">
-      <xsl:value-of select="$req.idn.prefix"/>
+    <xsl:if test="$req.idn.output.prefix != ''">
+      <xsl:value-of select="$req.idn.output.prefix"/>
     </xsl:if>
     <xsl:call-template name="decode-idn">
       <xsl:with-param name="str" select="."/>
