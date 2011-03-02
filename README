@@ -8,8 +8,8 @@ Usage
 1) Author software requirements in an XML document (1). A sample XML input
    can be found at: 'example/reqs.xml'
 
-   This project defines a grammar -see 'schema/rng'- for specifying software 
-   requirements in XML. Using a RelaxNG-aware XML editor (e.g. Emacs nXML-mode) 
+   This project defines a grammar for specifying software requirements in XML
+   -see 'schema/rng'. Using a RelaxNG-aware XML editor (e.g. Emacs nXML-mode) 
    can make XML authoring of requirements very easy.
 
 2) Use (1) to generate a LaTeX file that only contains LaTeX bindings:
