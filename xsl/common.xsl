@@ -4,6 +4,7 @@
     version="1.0">
 
   <xsl:param name="newline" select="'&#10;'"/>
+  <xsl:param name="req.idn.prefix"></xsl:param>
 
   <xsl:include href="gentext.xsl"/>
   <xsl:include href="tex.xsl"/>
@@ -16,6 +17,15 @@
   <xsl:template name="decode-idn">
     <xsl:param name="str"/>
     <xsl:value-of select="substring-after($str, 'r')"/>
+  </xsl:template>
+
+  <xsl:template name="cons-req-label">
+    <xsl:if test="$req.idn.prefix != ''">
+      <xsl:value-of select="$req.idn.prefix"/>
+    </xsl:if>
+    <xsl:call-template name="decode-idn">
+      <xsl:with-param name="str" select="."/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template name="req-idn">
@@ -33,7 +43,7 @@
     <xsl:variable name="resolved-field">
       <xsl:call-template name="gentext">
 	<xsl:with-param name="context" select="$field"/>
-      </xsl:call-template>      
+      </xsl:call-template>
     </xsl:variable>
     <xsl:call-template name="tex-command">
       <xsl:with-param name="name" select="concat('iPicoReq', $req-idn, 

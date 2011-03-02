@@ -22,9 +22,7 @@
 	<xsl:call-template name="cons-idn-var"/>
       </xsl:with-param>
       <xsl:with-param name="value">
-	<xsl:call-template name="decode-idn">
-	  <xsl:with-param name="str" select="."/>
-	</xsl:call-template>
+	<xsl:call-template name="cons-req-label"/>
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>
