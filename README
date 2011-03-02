@@ -33,14 +33,17 @@ Usage
    in order for LaTeX to typeset the generated index entries.
 
 (*) There's also a Makefile under the 'example' directory that captures 
-    the above tasks. Simply type 'make' under the 'example' directory.
+    the above tasks. Simply type 'make' under the 'example' directory and
+    press Return.
 
 Notes
 -----
 1) Requirement identifiers must be prefixed with the value of the
-   'req.idn.input.prefix' parameter defined in xsl/params.xsl
+   'req.idn.input.prefix' parameter defined in xsl/params.xsl.
 
-  Example:
+  The 'req.idn.input.prefix' parameter is set to 'r' by default.
+
+  An example of what requirement identifiers could look like:
 
     <req xml:id="rLunchRocket"> ... </req>
 
