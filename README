@@ -1,6 +1,6 @@
-This project helps you *specify software requirements* in a high-level 
-*XML* format and *generates LaTeX* markup that can be included in a host 
-LaTeX document.
+This project features a computer program that helps specify software
+requirements in a high-level language and transform those specifications 
+into LaTeX markup that can be included in a host LaTeX document.
 
 Usage
 =====
